@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="dialog_background">#552F0968</color>
+    <color name="aircasting_standard">#FF2F0868</color>
+    <color name="aircasting_light">#FF9783B3</color>
+    <color name="gauge_transparent">#CFFF</color>
+
+    <color name="dashboard_white">#FBF9FC</color>
+    <color name="green">#FF00A33D</color>
+    <color name="yellow">#FFFFD800</color>
+    <color name="orange">#FFFF7F00</color>
+    <color name="red">#FFFE0000</color>
+    <color name="blue">#FF3DB8DD</color>
+
+    <color name="graph_green">#FF65C68A</color>
+    <color name="graph_yellow">#FFFEE665</color>
+    <color name="graph_orange">#FFFEB065</color>
+    <color name="graph_red">#FFFE6465</color>
+
+    <color name="list_selected">#FFD5E9FF</color>
+    <color name="list_odd">#FFEFEFEF</color>
+    <color name="list_even">#FFFDFBFD</color>
+    <color name="list_viewing_session_even">#CBF0FA</color>
+    <color name="list_viewing_session_odd">#9BE0F8</color>
+
+    <color name="transparent">#0FFF</color>
+
+    <color name="dashboard_background">#FCFAFD</color>
+    <color name="dashboard_light_gray">#EDEDED</color>
+    <color name="dashboard_text_gray">#787878</color>
+    <color name="dashboard_delete_stram_bckgd">#FAD5CB</color>
+
+    <color name="lighter_gray">#C6CBC6</color>
+    <color name="gray">#8C8C8C</color>
+
+    <color name="button_gray">#E7ECE7</color>
+    <color name="button_focused">#22C5EE</color>
+    <color name="splash_background">#009ddb</color>
+
+    <color name="gps_route">#007bf2</color>
+    <color name="bar_blue">#0BB8F4</color>
+    <color name="toolbar_blue">#0BB0F2</color>
+</resources>
