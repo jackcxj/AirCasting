@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/store_lay"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/location_lay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/title_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            layout="@layout/main_title"
+            />
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_below="@+id/card_view"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.example.aircasting.map.MapsActivity" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:elevation="3dp"
+            app:cardCornerRadius="3dp"
+            app:contentPadding="08dp"
+            android:layout_below="@+id/title_layout"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/origine" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/txt_input_pickup_location"
+                            android:layout_width="250dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/pickup_location"
+                                android:layout_width="250dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/curved_white"
+                                android:focusable="false"
+                                android:fontFamily="sans-serif-condensed"
+                                android:hint="@string/start_point"
+                                android:inputType="none"
+                                android:maxLines="1"
+                                android:padding="10dp"
+                                android:singleLine="true"
+                                android:textColor="@color/txt_strong"
+                                android:textSize="15sp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/use_current_location_pickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="centerInside"
+                        android:layout_centerInParent="true"
+                        android:background="@android:color/white"
+                        android:src="@drawable/location"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="10dp"
+                        >
+                    </ImageButton>
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/destination" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txt_input_drop_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/drop_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/curved_white"
+                            android:focusable="false"
+                            android:fontFamily="sans-serif-condensed"
+                            android:hint="@string/destination"
+                            android:inputType="none"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:singleLine="true"
+                            android:textColor="@color/txt_strong"
+                            android:textSize="15sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+<!--        <Button-->
+<!--            android:id="@+id/air_pollution_routing_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/card_view"-->
+<!--            android:layout_marginLeft="10dp"-->
+
+<!--            android:text="Air pollution routing"-->
+<!--            android:onClick="airOnClick"/>-->
+
+
+<!--        <Button-->
+<!--            android:id="@+id/normal_routing"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@+id/card_view"-->
+<!--            android:layout_toRightOf="@+id/air_pollution_routing_button"-->
+
+<!--            android:layout_marginHorizontal="5dp"-->
+<!--            android:text="normal routing"-->
+<!--            android:layout_marginRight="10dp"-->
+<!--            android:onClick="normalOnclick"/>-->
+
+
+        <LinearLayout
+            android:id="@+id/route_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/store_shadow"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@drawable/background" />
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:background="@color/bg_color"-->
+<!--                android:gravity="center"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:paddingBottom="12dp"-->
+<!--                android:paddingLeft="16dp"-->
+<!--                android:paddingRight="16dp"-->
+<!--                android:paddingTop="12dp">-->
+
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/routes"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:visibility="gone">-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content">-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="25dp"-->
+<!--                            android:layout_height="25dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:src="@drawable/navigation" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/total_kms"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginLeft="12dp"-->
+<!--                            android:fontFamily="monospace"-->
+<!--                            android:text="hello"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                        <ImageView-->
+<!--                            android:layout_width="22dp"-->
+<!--                            android:layout_height="22dp"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginLeft="28dp"-->
+<!--                            android:src="@drawable/circular_clock" />-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/total_time"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_marginLeft="12dp"-->
+<!--                            android:fontFamily="monospace"-->
+<!--                            android:text="23"-->
+<!--                            android:textSize="16sp" />-->
+
+<!--                        &lt;!&ndash;<ImageButton&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:id="@+id/more_pollution_info"&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:layout_width="30dp"&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:layout_height="30dp"&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:layout_gravity="center"&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:layout_marginLeft="32dp"&ndash;&gt;-->
+<!--                        &lt;!&ndash;android:background="@drawable/more_air_pollution_info"&ndash;&gt;-->
+<!--                        &lt;!&ndash;/>&ndash;&gt;-->
+<!--                        <Button-->
+<!--                            android:id="@+id/more_pollution_info"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="deatils"-->
+<!--                            android:drawableLeft="@drawable/more_air_pollution_info"-->
+<!--                            android:layout_marginLeft="25dp"-->
+<!--                            android:textSize="13dp"-->
+<!--                            android:textAllCaps="false"-->
+<!--                            android:stateListAnimator="@null"-->
+<!--                            android:textAlignment="textStart"-->
+<!--                            android:fontFamily="monospace"-->
+<!--                            android:background="#FFFFFF"-->
+<!--                            android:textColor="#737373"/>-->
+<!--                    </LinearLayout>-->
+
+
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginLeft="6dp"-->
+<!--                        android:layout_marginTop="12dp"-->
+<!--                        android:fontFamily="monospace"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="Click here for Route Info"-->
+<!--                        android:textSize="15sp" />-->
+<!--                </LinearLayout>-->
+
+                <TextView
+                    android:id="@+id/no_routes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No routes found"
+                    android:visibility="gone" />
+
+<!--                <ProgressBar-->
+<!--                    android:id="@+id/progress"-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:layout_gravity="center" />-->
+<!--            </LinearLayout>-->
+        </LinearLayout>
+    </RelativeLayout>
+
+<!--    &lt;!&ndash; Bottom Sheet &ndash;&gt;-->
+<!--    <include layout="@layout/fragment_directions_bottom_sheet" />-->
+
+<!--    &lt;!&ndash; air pollution Sheet &ndash;&gt;-->
+<!--    <include layout="@layout/fragment_air_pollution_bottom_sheet" />-->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
