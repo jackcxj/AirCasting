@@ -544,8 +544,7 @@ public class MapsActivity extends FragmentActivity implements
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.d(TAG, "Place: " + place.getName());
                 Log.d(TAG, "Place detail: " + place);
-                LatLng latlng = getLocationFromAddress(this, place.getName());
-
+                LatLng latlng = getLocationFromAddress(MapsActivity.this, place.getName());
 
                 // set marker for pickup
                 if (requestCode == REQUEST_PICKUP_LOCATION) {
@@ -553,7 +552,7 @@ public class MapsActivity extends FragmentActivity implements
                     if (_pickupMarker != null) {
                         _pickupMarker.remove();
                     }
-//                    Log.d(TAG, "Place location2: " + place.getLatLng());
+                    Log.d(TAG, "Place location pick: " + place.getName());
                     _pickupMarker = mMap.addMarker(new MarkerOptions().position(latlng)
                             .title("Pickup")
                             .icon(BitmapDescriptorFactory
@@ -569,13 +568,14 @@ public class MapsActivity extends FragmentActivity implements
                     if (_dropMarker != null) {
                         _dropMarker.remove();
                     }
-
+                    Log.d(TAG, "Place location drop: " + place.getName());
                     _dropMarker = mMap.addMarker(new MarkerOptions().position(latlng)
                             .title("Drop")
                             .icon(BitmapDescriptorFactory
                                     .fromBitmap(getSmallerSize(R.drawable.destination))));
 
                     _dropLatLng = latlng;
+                    moveMarker(latlng.latitude, latlng.longitude);
                     _txtEdtDrop.setText(place.getName());
                 }
 
@@ -621,7 +621,8 @@ public class MapsActivity extends FragmentActivity implements
                 }
 
 
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+            }
+            else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.i(TAG, status.getStatusMessage());
 //                showNoRoutesFound();
@@ -639,17 +640,16 @@ public class MapsActivity extends FragmentActivity implements
         Geocoder coder = new Geocoder(context);
         List<Address> address;
         LatLng p1 = null;
-
+        
         try {
-            // May throw an IOException
-            address = coder.getFromLocationName(strAddress, 5);
-            if (address == null) {
-                return null;
+            if(coder.isPresent()){
+                // May throw an IOException
+                address = coder.getFromLocationName(strAddress, 5);
+                Log.d(TAG, "Address: " + address.toString());
+                Address location = address.get(0);
+                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
             }
-
-            Address location = address.get(0);
-            p1 = new LatLng(location.getLatitude(), location.getLongitude());
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
