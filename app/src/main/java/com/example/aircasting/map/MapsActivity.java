@@ -54,6 +54,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.model.TypeFilter;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
@@ -61,7 +62,18 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -508,7 +520,7 @@ public class MapsActivity extends FragmentActivity implements
     private void findPlace(int requestId) {
         Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
 
-        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME);
+        List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
 //        int checkGooglePlayServices = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         try {
 //            Intent intent =
@@ -544,8 +556,8 @@ public class MapsActivity extends FragmentActivity implements
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 Log.d(TAG, "Place: " + place.getName());
                 Log.d(TAG, "Place detail: " + place);
-                LatLng latlng = getLocationFromAddress(MapsActivity.this, place.getName());
-
+//                LatLng latlng = getLocationFromAddress(MapsActivity.this, place.getName());
+                LatLng latlng = place.getLatLng();
                 // set marker for pickup
                 if (requestCode == REQUEST_PICKUP_LOCATION) {
                     // clearing pickup marker and adding new Pickup point
@@ -635,26 +647,28 @@ public class MapsActivity extends FragmentActivity implements
     }
 
 
-    public LatLng getLocationFromAddress(Context context, String strAddress) {
-
-        Geocoder coder = new Geocoder(context);
-        List<Address> address;
-        LatLng p1 = null;
-        
-        try {
-            if(coder.isPresent()){
-                // May throw an IOException
-                address = coder.getFromLocationName(strAddress, 5);
-                Log.d(TAG, "Address: " + address.toString());
-                Address location = address.get(0);
-                p1 = new LatLng(location.getLatitude(), location.getLongitude());
-
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return p1;
-    }
+//    public LatLng getLocationFromAddress(Context context, String strAddress) {
+//
+//        Geocoder coder = new Geocoder(context);
+//        List<Address> address;
+//        LatLng p1 = null;
+//
+//        try {
+//            if(coder.isPresent()){
+//                // May throw an IOException
+////                address = coder.getFromLocationName(strAddress, 5);
+////                Log.d(TAG, "Address: " + address.toString());
+////                Address location = address.get(0);
+////                p1 = new LatLng(location.getLatitude(), location.getLongitude());
+////                p1 = this.getLatLng(this.getLocationInfo(strAddress));
+//                p1 = new LatLng();
+//
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return p1;
+//    }
 
     private void showNoRoutesFound() {
         Log.d(TAG, "No routes found");
@@ -675,5 +689,47 @@ public class MapsActivity extends FragmentActivity implements
             _polylineList.clear();
         }
     }
+
+//    public JSONObject getLocationInfo(String address){
+//       HttpGet httpGet = new HttpGet("http://maps.google.com/maps/api/geocode/json?address="
+//               + address + "&key=AIzaSyAC5xgOYQCxt4ZaIAzaPoBSbwc4L9RfzI0");
+//       HttpClient client = new DefaultHttpClient();
+//       HttpResponse response;
+//       StringBuilder stringBuilder = new StringBuilder();
+//       try{
+//           response = client.execute(httpGet);
+//           HttpEntity entity = response.getEntity();
+//           InputStream stream = entity.getContent();
+//           int b;
+//           while ((b = stream.read()) != -1) {
+//               stringBuilder.append((char) b);
+//           }
+//       } catch (ClientProtocolException e) {
+//       } catch (IOException e) {
+//       }
+//       JSONObject jsonObject = new JSONObject();
+//       try {
+//           jsonObject = new JSONObject(stringBuilder.toString());
+//       } catch (JSONException e) {
+//           // TODO Auto-generated catch block    
+//           e.printStackTrace();
+//       }
+//        return jsonObject;
+//    }
+//
+//    public LatLng getLatLng(JSONObject jsonObject) {
+//        Double lon = new Double(0);
+//        Double lat = new Double(0);
+//        try {
+//            lon = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
+//                    .getJSONObject("geometry").getJSONObject("location").getDouble("lng");
+//            lat = ((JSONArray) jsonObject.get("results")).getJSONObject(0)
+//                    .getJSONObject("geometry").getJSONObject("location").getDouble("lat");
+//        }catch(JSONException e){
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        return new LatLng((int) (lat * 1E6), (int) (lon * 1E6));
+//    }
 }
 
